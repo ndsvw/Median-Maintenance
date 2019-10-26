@@ -11,6 +11,16 @@ public class MedianMaintenance {
 		smallHalf = new PriorityQueue<Integer>(size, Collections.reverseOrder());
 		largeHalf = new PriorityQueue<Integer>(size);
 	}
+	
+	public int getMedian() throws Exception {
+		if (smallHalf.size() == largeHalf.size() || smallHalf.size() - 1 == largeHalf.size()) {
+			return smallHalf.peek();
+		} else if (smallHalf.size() == largeHalf.size() - 1) {
+			return largeHalf.peek();
+		} else {
+			throw new Exception("There is an error in the over-heap-balancing");
+		}
+	}
 
 	public void add(int n) {
 		if (smallHalf.size() == 0 && largeHalf.size() == 0) {
