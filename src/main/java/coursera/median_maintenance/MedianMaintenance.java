@@ -59,4 +59,9 @@ public class MedianMaintenance {
 			}
 		}
 	}
+
+	public int addAndReturnMedian(int n) throws Exception {
+		add(n);
+		return getMedian();
+	}
 }
