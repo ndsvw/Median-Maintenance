@@ -7,6 +7,11 @@ public class MedianMaintenance<T extends Number & Comparable<T>> {
 	private PriorityQueue<T> smallHalf;
 	private PriorityQueue<T> largeHalf;
 
+	public MedianMaintenance() {
+		smallHalf = new PriorityQueue<T>(Collections.reverseOrder());
+		largeHalf = new PriorityQueue<T>();
+	}
+	
 	public MedianMaintenance(int size) {
 		smallHalf = new PriorityQueue<T>(size, Collections.reverseOrder());
 		largeHalf = new PriorityQueue<T>(size);
