@@ -68,4 +68,26 @@ public class AppTest {
 		}
 	}
 
+	@Test
+	public void testByte() throws Exception {
+		byte[] arr = new byte[] { 'a', 'c', 'd', 'z', 'x' };
+		byte[] medians = new byte[] { 'a', 'a', 'c', 'c', 'd' };
+		MedianMaintenance<Byte> mm = new MedianMaintenance<Byte>(arr.length);
+		for (int i = 0; i < 5; i++) {
+			assertEquals((byte) mm.addAndReturnMedian(arr[i]), medians[i]);
+		}
+	}
+
+	@Test
+	public void testBigInteger() throws Exception {
+		BigInteger[] arr = new BigInteger[] { BigInteger.ONE, BigInteger.ZERO, new BigInteger("12345678901234567890"),
+				new BigInteger("99999999909999999990"), new BigInteger("10").pow(100) };
+		BigInteger[] medians = new BigInteger[] { BigInteger.ONE, BigInteger.ZERO, BigInteger.ONE, BigInteger.ONE,
+				new BigInteger("12345678901234567890"), new BigInteger("12345678901234567890") };
+		MedianMaintenance<BigInteger> mm = new MedianMaintenance<BigInteger>(arr.length);
+		for (int i = 0; i < 5; i++) {
+			assertEquals((BigInteger) mm.addAndReturnMedian(arr[i]), medians[i]);
+		}
+	}
+
 }
