@@ -3,16 +3,16 @@ package coursera.median_maintenance;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-public class MedianMaintenance {
-	private PriorityQueue<Integer> smallHalf;
-	private PriorityQueue<Integer> largeHalf;
-	
+public class MedianMaintenance<T extends Number & Comparable<T>> {
+	private PriorityQueue<T> smallHalf;
+	private PriorityQueue<T> largeHalf;
+
 	public MedianMaintenance(int size) {
-		smallHalf = new PriorityQueue<Integer>(size, Collections.reverseOrder());
-		largeHalf = new PriorityQueue<Integer>(size);
+		smallHalf = new PriorityQueue<T>(size, Collections.reverseOrder());
+		largeHalf = new PriorityQueue<T>(size);
 	}
-	
-	public int getMedian() throws Exception {
+
+	public T getMedian() throws Exception {
 		if (smallHalf.size() == largeHalf.size() || smallHalf.size() - 1 == largeHalf.size()) {
 			return smallHalf.peek();
 		} else if (smallHalf.size() == largeHalf.size() - 1) {
@@ -22,13 +22,13 @@ public class MedianMaintenance {
 		}
 	}
 
-	public void add(int n) {
+	public void add(T n) {
 		if (smallHalf.size() == 0 && largeHalf.size() == 0) {
 			largeHalf.add(n);
 			return;
 		}
 		if (smallHalf.size() == 0 && largeHalf.size() > 0) {
-			if (largeHalf.peek() >= n) {
+			if (largeHalf.peek().compareTo(n) >= 0) {
 				smallHalf.add(n);
 			} else {
 				smallHalf.add(largeHalf.poll());
@@ -36,15 +36,15 @@ public class MedianMaintenance {
 			}
 			return;
 		}
-		int x = smallHalf.peek();
-		int y = largeHalf.peek();
-		if (n <= x) {
+		T x = smallHalf.peek();
+		T y = largeHalf.peek();
+		if (n.compareTo(x) <= 0) {
 			// needs to be inserted into the smallHalf
 			if (smallHalf.size() > largeHalf.size()) {
 				largeHalf.add(smallHalf.poll());
 			}
 			smallHalf.add(n);
-		} else if (n >= y) {
+		} else if (n.compareTo(y) >= 0) {
 			// needs to be inserted into the largeHalf
 			if (largeHalf.size() > smallHalf.size()) {
 				smallHalf.add(largeHalf.poll());
@@ -60,7 +60,7 @@ public class MedianMaintenance {
 		}
 	}
 
-	public int addAndReturnMedian(int n) throws Exception {
+	public T addAndReturnMedian(T n) throws Exception {
 		add(n);
 		return getMedian();
 	}
