@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
  * <p>Median-Maintenance keeps track of the median of a growing list of numbers.</p>
  * Complexity:
  * <ul>
- * <li>add(int x) =&gt; O(log(n)), n is the number of elements so far</li>
+ * <li>add(T x) =&gt; O(log(n)), n is the number of elements so far</li>
  * <li>getMedian() =&gt; O(1)</li>
  * <li>adding n elements to this data structure and return the median after each add-Operation: O(n*log(n))</li>
  * </ul>
